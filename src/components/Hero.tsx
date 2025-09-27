@@ -81,7 +81,7 @@ const Hero = () => {
           </div>
 
           <div className="mt-10 grid w-full max-w-2xl grid-cols-3 overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur">
-            {[{k:"Hours", v:"8"}, {k:"Students", v:"70+"}, {k:"Prizes", v:"Very Valuable"}].map((s, i) => (
+            {[{k:"Hours", v:"8"}, {k:"Students", v:"70+"}, {k:"Prizes", v:"Top"}].map((s, i) => (
               <div key={s.k} className={`flex flex-col items-center py-5 ${i!==2 ? 'border-r border-white/10' : ''}`}>
                 <div className="text-3xl sm:text-4xl font-bold text-white">{s.v}</div>
                 <div className="mt-1 text-[11px] sm:text-xs uppercase tracking-wide text-white/70">{s.k}</div>
