@@ -91,7 +91,7 @@ const About = () => {
                       <div>
                         <h4 className="text-lg md:text-xl font-semibold text-white">Win & Achieve</h4>
                         <p className="mt-1 text-white/85 leading-relaxed">
-                          Compete for cash prizes, gear, internships, and ongoing mentorship.
+                          Compete for cash prizes, level up through hands-on workshops, and get ongoing mentorship.
                         </p>
                       </div>
                     </div>
