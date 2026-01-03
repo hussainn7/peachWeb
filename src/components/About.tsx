@@ -10,33 +10,10 @@ const About = () => {
     <section
       id="about"
       className="
-        relative overflow-hidden py-24
+        relative py-24
         text-white
       "
     >
-      {/* Smooth bridge from dark hero to section */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 -top-10 h-10
-                   bg-[linear-gradient(to_bottom,rgba(8,8,12,1),rgba(8,8,12,0))]"
-      />
-
-      {/* Subtle peachy ambience on a dark base (readable) */}
-      <div
-        aria-hidden
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(180deg, rgba(12,12,16,0.96) 0%, rgba(12,12,16,0.94) 40%, rgba(12,12,16,0.90) 100%), radial-gradient(900px 420px at 10% 20%, rgba(255,176,103,0.14), transparent 60%), radial-gradient(780px 360px at 90% 30%, rgba(255,239,199,0.10), transparent 60%), radial-gradient(820px 320px at 50% 90%, rgba(255,140,94,0.12), transparent 60%)",
-        }}
-      />
-
-      {/* tone down spotlight blur/opacity so text stays crisp */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -inset-20 blur-2xl opacity-30"
-      />
-
       <div className="container relative z-10 mx-auto max-w-7xl px-6">
         <ScrollAnimation>
           <div className="text-center mb-16">
@@ -76,7 +53,7 @@ const About = () => {
                           Work with cutting-edge tools and ship real solutions — from AI assistants to full-stack web apps.
                         </p>
                         <div className="mt-3 flex flex-wrap gap-2">
-                          {["AI", "Web", "Mobile", "Hardware"].map((t) => (
+                          {["AI", "Web", "Mobile", "Design"].map((t) => (
                             <Badge
                               key={t}
                               variant="secondary"
@@ -141,11 +118,11 @@ const About = () => {
                       <h4 className="text-xl font-semibold mb-4 text-white">Event Details</h4>
 
                       <div className="grid grid-cols-1 gap-3">
-                        <DetailRow icon={CalendarDays} label="Date" value="Oct 15, 2025" />
-                        <DetailRow icon={Clock} label="Duration" value="8 Hours" />
-                        <DetailRow icon={MapPin} label="Location" value="Cumming, GA" />
+                        <DetailRow icon={CalendarDays} label="Date" value="Jan 10, 2026" />
+                        <DetailRow icon={Clock} label="Duration" value="9:30 AM – 6:00 PM" />
+                        <DetailRow icon={MapPin} label="Location" value="Forsyth Central High School, Cumming, GA" />
                         <DetailRow icon={Ticket} label="Entry Cost" value={<span className="font-bold text-primary">FREE</span>} />
-                        <DetailRow icon={Users} label="Team Size" value="1–4 students" />
+                        <DetailRow icon={Users} label="Team Size" value="1-4 students" />
                         <DetailRow icon={BadgeCheck} label="Eligibility" value="High-school students" />
                       </div>
 
@@ -160,68 +137,6 @@ const About = () => {
           </ScrollAnimation>
         </div>
 
-        {/* Leadership Section */}
-        <ScrollAnimation delay={400}>
-          <div className="mt-16">
-            <h3 className="text-2xl md:text-3xl font-semibold mb-8 text-white text-center">
-              Our Leadership Team
-            </h3>
-            <div className="grid gap-6 md:grid-cols-3">
-              <Tilt glare className="block">
-                <Card className="bg-white/8 border border-white/12 backdrop-blur-xl shadow-2xl overflow-hidden">
-                  <CardContent className="p-6 text-center">
-                    <div className="w-16 h-16 rounded-full bg-gradient-to-r from-primary to-accent flex items-center justify-center text-white font-bold text-xl mx-auto mb-4">
-                      HS
-                    </div>
-                    <h4 className="text-lg font-semibold text-white mb-2">Hussain Syed</h4>
-                    <p className="text-white/70">Founder & President</p>
-                  </CardContent>
-                </Card>
-              </Tilt>
-
-              <Tilt glare className="block">
-                <Card className="bg-white/8 border border-white/12 backdrop-blur-xl shadow-2xl overflow-hidden">
-                  <CardContent className="p-6 text-center">
-                    <div className="w-16 h-16 rounded-full bg-gradient-to-r from-accent to-primary flex items-center justify-center text-white font-bold text-xl mx-auto mb-4">
-                      AN
-                    </div>
-                    <h4 className="text-lg font-semibold text-white mb-2">Anubhav N</h4>
-                    <p className="text-white/70">Vice President</p>
-                  </CardContent>
-                </Card>
-              </Tilt>
-
-              <Tilt glare className="block">
-                <Card className="bg-white/8 border border-white/12 backdrop-blur-xl shadow-2xl overflow-hidden">
-                  <CardContent className="p-6 text-center">
-                    <div className="w-16 h-16 rounded-full bg-gradient-to-r from-primary-light to-accent flex items-center justify-center text-white font-bold text-xl mx-auto mb-4">
-                      AR
-                    </div>
-                    <h4 className="text-lg font-semibold text-white mb-2">Aasrith R</h4>
-                    <p className="text-white/70">Technical Lead</p>
-                  </CardContent>
-                </Card>
-              </Tilt>
-            </div>
-          </div>
-        </ScrollAnimation>
-
-        {/* Info band */}
-        <div className="mt-16 grid gap-4 sm:grid-cols-3">
-          {[
-            { k: "Beginner-friendly", v: "No experience required" },
-            { k: "Hardware-ready", v: "Microcontrollers available" },
-            { k: "Inclusive", v: "Everyone welcome" },
-          ].map((item) => (
-            <div
-              key={item.k}
-              className="rounded-2xl border border-white/12 bg-white/8 p-4 text-center backdrop-blur-xl"
-            >
-              <p className="text-sm text-white/80">{item.k}</p>
-              <p className="text-white font-semibold">{item.v}</p>
-            </div>
-          ))}
-        </div>
       </div>
     </section>
   );

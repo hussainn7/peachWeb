@@ -1,53 +1,18 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Users, Mail, Lightbulb, Code, Trophy } from "lucide-react";
+import { Users, Code, Trophy } from "lucide-react";
 import ScrollAnimation from "@/components/ScrollAnimation";
 import Tilt from "@/components/Tilt";
 
 const steps = [
-  { step: 1, title: "Register", description: "Sign up individually or with your team. Registration is completely free and open to all Georgia high school students.", icon: Users },
-  { step: 2, title: "Get Updates", description: "Join our Discord and follow us on social media for important updates, workshop announcements, and community discussions.", icon: Mail },
-  { step: 3, title: "Learn & Ideate", description: "Attend our pre-hackathon workshops, brainstorm ideas, and start planning your project with your team.", icon: Lightbulb },
-  { step: 4, title: "Build Your Project", description: "Code for 24 hours straight! Build websites, mobile apps, games, or any creative digital solution you can imagine.", icon: Code },
-  { step: 5, title: "Present & Win", description: "Present your project to judges, compete for prizes, and celebrate your achievements with the community.", icon: Trophy },
+  { title: "Register", description: "Sign up individually or with your team. Registration is completely free and open to all Georgia high school students.", icon: Users },
+  { title: "Build Your Project", description: "Code for 24 hours straight! Build websites, mobile apps, games, or any creative digital solution you can imagine.", icon: Code },
+  { title: "Present & Win", description: "Present your project to judges, compete for prizes, and celebrate your achievements with the community.", icon: Trophy },
 ];
 
 const HowItWorks = () => {
   return (
-    <section id="how-it-works" className="relative py-24 text-white overflow-hidden">
-      {/* bridge from previous section */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 -top-10 h-10 bg-[linear-gradient(to_bottom,rgba(8,8,12,1),rgba(8,8,12,0))]"
-      />
-
-      {/* dark base with animated peach aura */}
-      <div
-        aria-hidden
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(180deg, rgba(12,12,16,0.96) 0%, rgba(12,12,16,0.94) 40%, rgba(12,12,16,0.90) 100%), radial-gradient(900px 420px at 15% 20%, rgba(255,176,103,0.12), transparent 60%), radial-gradient(780px 360px at 85% 30%, rgba(255,239,199,0.10), transparent 60%)",
-        }}
-      />
-
-      {/* conic ring aura behind title */}
-      <div
-        aria-hidden
-        className="
-          absolute -top-24 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full
-          opacity-35 blur-3xl
-          bg-[conic-gradient(from_0deg,rgba(255,176,103,.18),transparent_30%,transparent_70%,rgba(255,239,199,.18))]
-          animate-[spin_16s_linear_infinite]
-          motion-reduce:animate-none
-        "
-      />
-
-      {/* drifting sparkles */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 [background-image:radial-gradient(2px_2px_at_20%_30%,rgba(255,255,255,.16),transparent),radial-gradient(2px_2px_at_70%_60%,rgba(255,255,255,.10),transparent)] animate-[pulse_6s_ease-in-out_infinite] motion-reduce:animate-none"
-      />
+    <section id="how-it-works" className="relative py-24 text-white">
 
       <div className="container relative z-10 mx-auto px-6">
         <ScrollAnimation>
@@ -64,17 +29,17 @@ const HowItWorks = () => {
           </div>
         </ScrollAnimation>
 
-        <div className="max-w-7xl mx-auto">
+        <div className="mx-auto max-w-5xl">
           {/* Equal-height tiles */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 md:gap-8 items-stretch auto-rows-fr">
+          <div className="grid grid-cols-1 gap-6 items-stretch auto-rows-fr sm:grid-cols-3 justify-items-center">
             {steps.map((step, index) => {
               const IconComponent = step.icon;
               return (
-                <ScrollAnimation key={step.step} delay={index * 100}>
+                <ScrollAnimation key={step.title} delay={index * 100}>
                   <Tilt className="relative block h-full" glare>
                     <Card
                       className="
-                        group relative h-full overflow-hidden
+                        group relative h-full w-full overflow-hidden max-w-sm
                         bg-white/8 border border-white/12 backdrop-blur-xl
                         shadow-[0_10px_30px_rgba(0,0,0,0.25)]
                         transition-all duration-300
@@ -120,7 +85,7 @@ const HowItWorks = () => {
                           "
                           aria-hidden
                         >
-                          {step.step}
+                          {index + 1}
                         </div>
 
                         {/* Icon with subtle float */}

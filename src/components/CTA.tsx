@@ -6,39 +6,7 @@ import Tilt from "@/components/Tilt";
 
 const CTA = () => {
   return (
-    <section className="relative overflow-hidden py-24 text-white">
-      {/* Smooth bridge from previous section */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 -top-10 h-10 bg-[linear-gradient(to_bottom,rgba(8,8,12,1),rgba(8,8,12,0))]"
-      />
-
-      {/* Dark base + animated peach aura */}
-      <div
-        aria-hidden
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(180deg,rgba(12,12,16,0.96),rgba(12,12,16,0.94) 40%,rgba(12,12,16,0.9)),radial-gradient(900px 420px at 15% 20%,rgba(255,176,103,.12),transparent 60%),radial-gradient(800px 380px at 85% 30%,rgba(255,239,199,.10),transparent 60%)",
-        }}
-      />
-
-      {/* Soft animated conic ring behind headline */}
-      <div
-        aria-hidden
-        className="
-          absolute -top-24 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full
-          opacity-40 blur-3xl
-          bg-[conic-gradient(from_0deg,rgba(255,176,103,.18),transparent_30%,transparent_70%,rgba(255,239,199,.18))]
-          animate-[spin_16s_linear_infinite]
-        "
-      />
-
-      {/* Tiny drifting sparkles */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 [background-image:radial-gradient(2px_2px_at_20%_30%,rgba(255,255,255,.18),transparent),radial-gradient(2px_2px_at_70%_60%,rgba(255,255,255,.12),transparent)] animate-[pulse_6s_ease-in-out_infinite]"
-      />
+    <section className="relative py-24 text-white">
 
       <div className="container relative z-10 mx-auto px-6">
         <div className="mx-auto max-w-6xl text-center">

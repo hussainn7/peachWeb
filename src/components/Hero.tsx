@@ -1,149 +1,192 @@
-import { useMemo } from "react";
 import { motion } from "framer-motion";
+import { useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import heroBg from "@/assets/hero-bg.jpg";
-
-const float = {
-  initial: { y: 0, opacity: 0 },
-  animate: (delay: number) => ({
-    y: [0, -10, 0],
-    opacity: 1,
-    transition: {
-      duration: 6,
-      repeat: Infinity,
-      delay,
-    },
-  }),
-};
+import { Link } from "react-router-dom";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
 
 const Hero = () => {
-  const bgStyle = useMemo(
-    () => ({
-      backgroundImage: `linear-gradient(180deg, rgba(7,7,10,0.55) 0%, rgba(7,7,10,0.65) 30%, rgba(7,7,10,0.8) 100%), url(${heroBg})`,
-      backgroundSize: "cover",
-      backgroundPosition: "center",
-    }),
-    []
-  );
+  const [newsletterOpen, setNewsletterOpen] = useState(false);
+  const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [newsletterStatus, setNewsletterStatus] = useState<
+    "idle" | "submitting" | "success" | "error"
+  >("idle");
+  const [newsletterError, setNewsletterError] = useState<string | null>(null);
+
+  async function handleNewsletterSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (newsletterStatus === "submitting") return;
+
+    setNewsletterStatus("submitting");
+    setNewsletterError(null);
+
+    try {
+      const formData = new FormData();
+      formData.append("email", newsletterEmail);
+
+      const response = await fetch("https://formspree.io/f/mzdzgjap", {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: formData,
+      });
+
+      if (response.ok) {
+        setNewsletterStatus("success");
+        setNewsletterEmail("");
+        return;
+      }
+
+      setNewsletterStatus("error");
+      setNewsletterError("Something went wrong. Try again.");
+    } catch {
+      setNewsletterStatus("error");
+      setNewsletterError("Network error.");
+    }
+  }
 
   return (
-    <section className="relative min-h-[92vh] w-full overflow-hidden">
-      <div aria-hidden className="absolute inset-0" style={bgStyle} />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -inset-20 blur-3xl opacity-50"
-        style={{
-          background:
-            "radial-gradient(800px 400px at 10% 20%, rgba(255,176,103,0.35), transparent 60%), radial-gradient(800px 400px at 90% 30%, rgba(255,239,199,0.25), transparent 60%), radial-gradient(700px 350px at 50% 80%, rgba(255,140,94,0.3), transparent 60%)",
-        }}
-      />
+    <section className="relative min-h-[92vh] w-full flex items-center justify-center">
+      <div className="relative z-10 px-6 text-center max-w-4xl mx-auto">
+        {/* Headline */}
+        <motion.h1
+          initial={{ clipPath: "inset(0 100% 0 0)" }}
+          animate={{ clipPath: "inset(0 0% 0 0)" }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
+          className="font-bold leading-tight text-5xl sm:text-6xl md:text-7xl xl:text-8xl"
+        >
+          <span className="bg-gradient-to-r from-white via-orange-100 to-amber-200 bg-clip-text text-transparent drop-shadow-sm">
+            FROM GEORGIA,
+          </span>
+          <br />
+          <span className="bg-gradient-to-r from-orange-300 via-amber-200 to-yellow-100 bg-clip-text text-transparent drop-shadow-sm font-black tracking-tight">
+            TO THE WORLD.
+          </span>
+        </motion.h1>
 
-      
+        {/* Subtext */}
+        <motion.p
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.1, duration: 0.6 }}
+          className="mt-6 max-w-xl mx-auto text-base sm:text-lg md:text-xl text-white/85"
+        >
+          Georgia’s sweetest high-school hackathon — a full day of building,
+          learning, and friendly competition.
+        </motion.p>
 
-      <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-12 gap-6 px-6 pt-28 pb-16 md:pt-32">
-        <div className="col-span-12 md:col-span-7 flex flex-col justify-center">
-          <div className="mb-5 inline-flex items-center gap-2 self-start rounded-full border border-white/15 bg-white/5 px-3 py-1 backdrop-blur">
-            <span className="h-2 w-2 rounded-full bg-emerald-400" />
-            <p className="text-xs font-medium tracking-wide text-white/80">
-              Free • Beginner‑friendly • In‑person
-            </p>
-          </div>
+        {/* Buttons */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.3, duration: 0.6 }}
+          className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
+        >
+          <Button
+            size="lg"
+            asChild
+            className="
+              relative overflow-hidden
+              px-8 py-6 text-lg font-semibold
+              shadow-lg transition-all duration-300 ease-out
+              hover:shadow-2xl hover:-translate-y-0.5
+              before:absolute before:inset-0
+              before:bg-gradient-to-r before:from-white/0 before:via-white/25 before:to-white/0
+              before:translate-x-[-100%]
+              hover:before:translate-x-[100%]
+              before:transition-transform before:duration-700
+            "
+          >
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSdLql9wxVoGHg3zOdDFhA1pZpny6IGjp_230U4bbQtd0-QF-g/viewform"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Register for Free
+            </a>
+          </Button>
 
-          <h1 className="font-bold leading-tight text-4xl sm:text-5xl md:text-6xl xl:text-7xl">
-            <span className="bg-gradient-to-r from-white via-orange-100 to-amber-200 bg-clip-text text-transparent drop-shadow-sm">
-              FROM GEORGIA,
-            </span>
-            <br />
-            <span className="bg-gradient-to-r from-orange-300 via-amber-200 to-yellow-100 bg-clip-text text-transparent drop-shadow-sm font-black tracking-tight">
-              TO THE WORLD.
-            </span>
-          </h1>
+          <Button
+            size="lg"
+            asChild
+            className="
+              relative overflow-hidden
+              px-8 py-6 text-lg font-semibold
+              border-2 border-white bg-white/90 text-primary
+              transition-all duration-300 ease-out
+              hover:shadow-2xl hover:-translate-y-0.5
+            "
+          >
+            <Link to="/#about">Learn More</Link>
+          </Button>
 
-          <p className="mt-6 max-w-2xl text-base sm:text-lg md:text-xl text-white/85">
-            Georgia's sweetest high‑school hackathon — 24 hours of building, learning,
-            and friendly competition in the heart of the Peach State.
-          </p>
+          <Dialog
+            open={newsletterOpen}
+            onOpenChange={(o) => {
+              setNewsletterOpen(o);
+              if (o) {
+                setNewsletterStatus("idle");
+                setNewsletterError(null);
+              }
+            }}
+          >
+            <DialogTrigger asChild>
+              <Button
+                size="lg"
+                className="
+                  relative overflow-hidden
+                  px-8 py-6 text-lg font-semibold
+                  shadow-lg transition-all duration-300
+                  hover:shadow-2xl hover:-translate-y-0.5
+                "
+              >
+                Newsletter
+              </Button>
+            </DialogTrigger>
 
-          <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
-            <Button size="lg" className="text-base sm:text-lg px-6 sm:px-8 py-6 font-semibold shadow-lg hover:shadow-xl" asChild>
-              <a href="https://docs.google.com/forms/d/e/1FAIpQLSdLql9wxVoGHg3zOdDFhA1pZpny6IGjp_230U4bbQtd0-QF-g/viewform?usp=dialog" target="_blank" rel="noopener noreferrer">
-                Register for Free
-              </a>
-            </Button>
-            <Button
-  size="lg"
-  className="text-base sm:text-lg px-6 sm:px-8 py-6 font-semibold shadow-lg hover:shadow-xl border-2 border-white bg-white/90 text-primary hover:bg-white transition-all duration-300"
->
-  Learn More
-</Button>
+            <DialogContent className="border border-white/15 bg-slate-950/90 text-white backdrop-blur-xl">
+              <DialogHeader>
+                <DialogTitle>Newsletter</DialogTitle>
+                <DialogDescription className="text-white/70">
+                  Event updates, workshops, and announcements.
+                </DialogDescription>
+              </DialogHeader>
 
-          </div>
+              <form onSubmit={handleNewsletterSubmit} className="grid gap-3">
+                <Input
+                  type="email"
+                  placeholder="you@example.com"
+                  value={newsletterEmail}
+                  onChange={(e) => setNewsletterEmail(e.target.value)}
+                  required
+                  className="bg-white/5 border-white/15 text-white placeholder:text-white/50"
+                />
 
-          <div className="mt-10 grid w-full max-w-2xl grid-cols-3 overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur">
-            {[{k:"Hours", v:"8"}, {k:"Students", v:"70+"}, {k:"Prizes", v:"Top"}].map((s, i) => (
-              <div key={s.k} className={`flex flex-col items-center py-5 ${i!==2 ? 'border-r border-white/10' : ''}`}>
-                <div className="text-3xl sm:text-4xl font-bold text-white">{s.v}</div>
-                <div className="mt-1 text-[11px] sm:text-xs uppercase tracking-wide text-white/70">{s.k}</div>
-              </div>
-            ))}
-          </div>
-        </div>
+                {newsletterStatus === "error" && (
+                  <p className="text-sm text-red-200">{newsletterError}</p>
+                )}
+                {newsletterStatus === "success" && (
+                  <p className="text-sm text-emerald-200">
+                    You’re subscribed.
+                  </p>
+                )}
 
-        <div className="col-span-12 md:col-span-5 flex items-center">
-          <div className="relative mx-auto grid w-full max-w-md gap-4">
-            <Card className="bg-white/10 border-white/10 backdrop-blur-xl shadow-2xl">
-              <CardContent className="p-5">
-                <p className="text-sm text-white/80">Hosted by</p>
-                <h3 className="mt-1 text-xl font-semibold text-white">Peach State Innovations</h3>
-                <p className="mt-2 text-sm text-white/70">
-                  Learn from mentors, meet new teammates, and ship something you’re proud of.
-                </p>
-              </CardContent>
-            </Card>
-
-            <div className="grid grid-cols-2 gap-4">
-              <Card className="bg-white/10 border-white/10 backdrop-blur-xl">
-                <CardContent className="p-4">
-                  <p className="text-xs uppercase tracking-wide text-white/60">When</p>
-                  <p className="mt-1 text-white font-medium">Oct 15, 2025</p>
-                  <p className="text-white/70 text-sm">8‑hour sprint</p>
-                </CardContent>
-              </Card>
-              <Card className="bg-white/10 border-white/10 backdrop-blur-xl">
-                <CardContent className="p-4">
-                  <p className="text-xs uppercase tracking-wide text-white/60">Where</p>
-                  <p className="mt-1 text-white font-medium">Cumming, GA</p>
-                  <p className="text-white/70 text-sm">On‑site venue</p>
-                </CardContent>
-              </Card>
-            </div>
-
-            <Card className="bg-white/10 border-white/10 backdrop-blur-xl">
-              <CardContent className="p-4">
-                <ul className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm text-white/85">
-                  <li>✔ Free admission</li>
-                  <li>✔ Food</li>
-                  <li>✔ Team matching</li>
-                  <li>✔ Beginner tracks</li>
-                </ul>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </div>
-
-      <div className="pointer-events-none absolute inset-x-0 bottom-6 flex justify-center">
-        <div className="flex items-center gap-3 text-white/70 text-xs">
-          <span className="hidden sm:inline">Scroll</span>
-          <div className="h-10 w-6 rounded-full border-2 border-white/30 flex items-start justify-center p-1">
-            <motion.div
-              className="h-2 w-1 rounded-full bg-white/60"
-              animate={{ y: [0, 20, 0] }}
-              transition={{ duration: 1.6, repeat: Infinity }}
-            />
-          </div>
-        </div>
+                <DialogFooter>
+                  <Button type="submit" disabled={newsletterStatus === "submitting"}>
+                    {newsletterStatus === "submitting" ? "Submitting..." : "Subscribe"}
+                  </Button>
+                </DialogFooter>
+              </form>
+            </DialogContent>
+          </Dialog>
+        </motion.div>
       </div>
     </section>
   );

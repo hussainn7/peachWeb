@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import React from "react";
+import { Link } from "react-router-dom";
 // If you're on Next.js, uncomment these lines to highlight the active tab:
 // import Link from "next/link";
 // import { usePathname } from "next/navigation";
@@ -7,9 +8,10 @@ import React from "react";
 const Header = () => {
   // const pathname = usePathname();
   const navItems = [
-    { name: "About", href: "#about" },
-    { name: "How It Works", href: "#how-it-works" },
-    { name: "Timeline", href: "#timeline" },
+    { name: "About", href: "/#about" },
+    { name: "How It Works", href: "/#how-it-works" },
+    { name: "Timeline", href: "/timeline" },
+    { name: "FAQ", href: "/faq" },
   ];
 
   return (
@@ -37,12 +39,13 @@ const Header = () => {
       <div className="px-4 sm:px-6">
         <div className="flex h-14 items-center justify-between">
           {/* Logo */}
-          <a
-            href="/"
+          <Link
+            to="/"
             className="relative select-none text-[15px] font-extrabold tracking-wide text-amber-100"
-          >PEACHSTATEHACKS
+          >
+            PEACHSTATEHACKS
             <span className="absolute -bottom-1 left-0 h-[2px] w-3 bg-[var(--glassAccent)]/70" />
-          </a>
+          </Link>
 
           {/* Links */}
           <div className="hidden md:flex items-center gap-2">
@@ -62,19 +65,35 @@ const Header = () => {
                       transition-colors
                     "
                   >
-                    <a href={item.href}>
-                      {item.name}
-                      {/* underline */}
-                      <span
-                        className={`
-                          pointer-events-none absolute bottom-1 left-2 right-2 h-[2px]
-                          origin-left scale-x-0 group-hover:scale-x-100
-                          transition-transform duration-300
-                          bg-gradient-to-r from-transparent via-[var(--glassAccent)] to-transparent
-                          ${isActive ? "scale-x-100" : ""}
-                        `}
-                      />
-                    </a>
+                    {item.href.startsWith("/") ? (
+                      <Link to={item.href}>
+                        {item.name}
+                        {/* underline */}
+                        <span
+                          className={`
+                            pointer-events-none absolute bottom-1 left-2 right-2 h-[2px]
+                            origin-left scale-x-0 group-hover:scale-x-100
+                            transition-transform duration-300
+                            bg-gradient-to-r from-transparent via-[var(--glassAccent)] to-transparent
+                            ${isActive ? "scale-x-100" : ""}
+                          `}
+                        />
+                      </Link>
+                    ) : (
+                      <a href={item.href}>
+                        {item.name}
+                        {/* underline */}
+                        <span
+                          className={`
+                            pointer-events-none absolute bottom-1 left-2 right-2 h-[2px]
+                            origin-left scale-x-0 group-hover:scale-x-100
+                            transition-transform duration-300
+                            bg-gradient-to-r from-transparent via-[var(--glassAccent)] to-transparent
+                            ${isActive ? "scale-x-100" : ""}
+                          `}
+                        />
+                      </a>
+                    )}
                   </Button>
                 </div>
               );
