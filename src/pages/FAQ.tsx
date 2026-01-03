@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ScrollAnimation from "@/components/ScrollAnimation";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Card, CardContent } from "@/components/ui/card";
 
 const faqs = [
@@ -22,7 +23,7 @@ const faqs = [
   {
     question: "Do I need a team?",
     answer:
-      "You can register solo or with a team of up to 4 people. If you don't have a team, we'll help you find one at the event.",
+      "You can register solo or with a team of up to 3 people. If you don't have a team, we'll help you find one at the event.",
   },
   {
     question: "What should I bring?",
@@ -51,18 +52,28 @@ const FAQ = () => {
               </div>
             </ScrollAnimation>
 
-            <div className="space-y-5">
-              {faqs.map((item, index) => (
-                <ScrollAnimation key={item.question} delay={120 + index * 70}>
-                  <Card className="border-white/12 bg-white/8 backdrop-blur-xl shadow-2xl">
-                    <CardContent className="p-6">
-                      <h2 className="text-lg sm:text-xl font-semibold text-white">{item.question}</h2>
-                      <p className="mt-2 text-white/85 leading-relaxed">{item.answer}</p>
-                    </CardContent>
-                  </Card>
-                </ScrollAnimation>
-              ))}
-            </div>
+            <ScrollAnimation delay={140}>
+              <Card className="border-white/12 bg-white/8 backdrop-blur-xl shadow-2xl">
+                <CardContent className="p-2 sm:p-4">
+                  <Accordion type="single" collapsible className="w-full">
+                    {faqs.map((item, index) => (
+                      <AccordionItem
+                        key={item.question}
+                        value={`item-${index + 1}`}
+                        className="border-white/12 last:border-b-0"
+                      >
+                        <AccordionTrigger className="px-4 sm:px-5 py-5 text-left text-white hover:no-underline">
+                          <span className="text-base sm:text-lg font-semibold">{item.question}</span>
+                        </AccordionTrigger>
+                        <AccordionContent className="px-4 sm:px-5 pb-5">
+                          <p className="text-white/85 leading-relaxed text-base">{item.answer}</p>
+                        </AccordionContent>
+                      </AccordionItem>
+                    ))}
+                  </Accordion>
+                </CardContent>
+              </Card>
+            </ScrollAnimation>
           </div>
         </section>
       </main>
@@ -73,4 +84,3 @@ const FAQ = () => {
 };
 
 export default FAQ;
-

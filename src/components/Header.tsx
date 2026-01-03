@@ -8,8 +8,7 @@ import { Link } from "react-router-dom";
 const Header = () => {
   // const pathname = usePathname();
   const navItems = [
-    { name: "About", href: "/#about" },
-    { name: "How It Works", href: "/#how-it-works" },
+    { name: "Home", href: "/#hero" },
     { name: "Timeline", href: "/timeline" },
     { name: "FAQ", href: "/faq" },
   ];

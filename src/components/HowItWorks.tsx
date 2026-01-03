@@ -6,7 +6,7 @@ import Tilt from "@/components/Tilt";
 
 const steps = [
   { title: "Register", description: "Sign up individually or with your team. Registration is completely free and open to all Georgia high school students.", icon: Users },
-  { title: "Build Your Project", description: "Code for 24 hours straight! Build websites, mobile apps, games, or any creative digital solution you can imagine.", icon: Code },
+  { title: "Build Your Project", description: "Build during the event! Create websites, mobile apps, games, or any creative digital solution you can imagine.", icon: Code },
   { title: "Present & Win", description: "Present your project to judges, compete for prizes, and celebrate your achievements with the community.", icon: Trophy },
 ];
 

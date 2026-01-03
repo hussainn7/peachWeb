@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
 import {
   Dialog,
   DialogContent,
@@ -53,7 +52,7 @@ const Hero = () => {
   }
 
   return (
-    <section className="relative min-h-[92vh] w-full flex items-center justify-center">
+    <section id="hero" className="relative min-h-[92vh] w-full flex items-center justify-center">
       <div className="relative z-10 px-6 text-center max-w-4xl mx-auto">
         {/* Headline */}
         <motion.h1
@@ -111,20 +110,6 @@ const Hero = () => {
             >
               Register for Free
             </a>
-          </Button>
-
-          <Button
-            size="lg"
-            asChild
-            className="
-              relative overflow-hidden
-              px-8 py-6 text-lg font-semibold
-              border-2 border-white bg-white/90 text-primary
-              transition-all duration-300 ease-out
-              hover:shadow-2xl hover:-translate-y-0.5
-            "
-          >
-            <Link to="/#about">Learn More</Link>
           </Button>
 
           <Dialog

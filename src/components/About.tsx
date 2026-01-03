@@ -99,6 +99,8 @@ const About = () => {
                 </ul>
               </div>
 
+              <div id="why-end" aria-hidden className="h-0 w-0" />
+
               {/* <div className="mt-8">
                 <Button className="group h-12 px-6 text-base font-semibold shadow-lg hover:shadow-xl">
                   See Tracks & Workshops
@@ -122,7 +124,7 @@ const About = () => {
                         <DetailRow icon={Clock} label="Duration" value="9:30 AM – 6:00 PM" />
                         <DetailRow icon={MapPin} label="Location" value="Forsyth Central High School, Cumming, GA" />
                         <DetailRow icon={Ticket} label="Entry Cost" value={<span className="font-bold text-primary">FREE</span>} />
-                        <DetailRow icon={Users} label="Team Size" value="1-4 students" />
+                        <DetailRow icon={Users} label="Team Size" value="1-3 students" />
                         <DetailRow icon={BadgeCheck} label="Eligibility" value="High-school students" />
                       </div>
 
